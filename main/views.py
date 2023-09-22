@@ -56,6 +56,7 @@ def register(request):
             return redirect('main:login')
     context = {'form':form}
     return render(request, "register.html", context)
+    
 
 def login_user(request):
     if request.method == 'POST':

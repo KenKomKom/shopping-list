@@ -1,50 +1,106 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page</h1>
+    <style>
+        .navbar{
+            display : flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-start;
+            width:100%;
+            background-color:#123456;
+            color:#FFFFFF;
+            padding-bottom:0px;
+        }
+        .navbar #judul{
+            padding-left:1%;
+            padding-top:0.5%;
+        }
+        .navbar #info{
+            display:flex;
+            flex-direction:row;
+            justify-content:space-around;
+            color:#000000;
+            background-color:#ABCDEF;
+            width:100%;
+        } 
+        .navbar #nama,#class{
+            display:flex;
+            flex-direction:row;
+            gap:10px;
+        }
+        .table-addButt{
+            display: flex;
+            flex-direction:row;
+            justify-content:space-around;
+            background-color:#AAAAAA;
+            align-items:center;
+        }
 
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    <br/>
-    <h5>Name:</h5>
-    <p>{{name}}</p>
 
-    <h5>Class:</h5>
-    <p>{{class}}</p>
+    </style>
+    <div class="navbar">
+        <div id="judul">
+            <h1>Shopping List Page</h1>
+            <h5>Sesi terakhir login: {{ last_login }}</h5>
+        </div>
 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Date Added</th>
-        </tr>
+        <br/>
+        <div id="info">
+            <div id="nama">
+                <h5>Name:</h5>
+                <p>{{name}}</p>
+            </div>
 
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+            <div id="class">
+                <h5>Class:</h5>
+                <p>{{class}}</p>
+            </div>
+        </div>
+    </div>
 
-        {% for product in products %}
+    <div class="table-addButt">
+        <table>
             <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.date_added}}</td>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Date Added</th>
             </tr>
-        {% endfor %}
-    </table>
 
+            {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+            {% for product in products %}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.date_added}}</td>
+                    <td>
+                        <a href="{% url 'main:edit_product' product.pk %}">
+                            <button type="button" class="btn btn-secondary">Edit</button>
+                        </a>
+                        <a href="{% url 'main:delete_product' product.pk %}">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                <tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'main:create_product' %}">
+            <button>
+                Add New Product
+            </button>
+        </a>
+    </div>
     <br />
 
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
-
-    <br/>
-
-    <a href="{% url 'main:create_product' %}">
-        <button>
-            Add New Product
-        </button>
-    </a>
+    <div class="logout">
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
+            </button>
+        </a>
+    </div>
 
 {% endblock content %}

@@ -1,0 +1,62 @@
+<body>
+    <h1>{{name}}</h1>
+    <h1>a</h1>
+    <h1>b</h1>
+    <h1>c</h1>
+    <h1>d</h1>
+
+    <button id="show">show</button>
+    <button id="hide">hide</button>
+    <script>
+        document.getElementById("show").ondblclick=show
+        document.getElementById("hide").ondblclick=hide
+        function f(){
+            var elemen = document.getElementsByTagName("h1")
+            for(var i=0; i<elemen.length; i+=1){
+                console.log(elemen[i]);
+                elemen[i].innerHTML=i;
+            }
+        }
+        function hide(){
+            var e = document.getElementsByTagName("h1");
+            for(var i=0; i<e.length; i+=1){
+                console.log(e[i]);
+                e[i].style.display="none";
+            }
+        }
+        function show(){
+            var e = document.getElementsByTagName("h1");
+            for(var i=0; i<e.length; i+=1){
+                console.log(e[i]);
+                e[i].style.display="block";
+            }
+        }
+    </script>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="a">A</label>
+        <input type="text" id="a" name="a">
+
+        <label for="datetime_local">date</label>
+        <input type="datetime-local" id="datetime_local" name="datetime-local">
+
+        <label for="b">B</label>
+        <input type="text" name="b">
+
+        <input type="range" name="rangeee" id="range">
+
+        <label for="A">A</label>
+        <input type="radio" id="A" name="radioname" value="A">
+        <label for="B">B</label>
+        <input type="radio" id="B"name="radioname" value="B">
+        <label for="C">C</label>
+        <input type="radio" id="C" name="radioname" value="C">
+
+        <input type="checkbox" id="check" name="box" value="A">
+        <label for="check">a</label>
+        <input type="checkbox" id="check" name="box" value="B">
+        <label for="check">b</label>
+        <input type="submit" name="submit">
+    </form>
+
+</body>

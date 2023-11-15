@@ -3,7 +3,7 @@ from main.views import  show_main, create_product, show_xml, \
                         show_json, show_xml_by_id, show_json_by_id, \
                         register, login_user, logout_user, edit_product,\
                         delete_product, get_product_json, add_product_ajax,\
-                        tes, create_product_flutter
+                        create_product_flutter
                         
 
 

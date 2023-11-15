@@ -5,7 +5,7 @@ from django.urls import reverse
 from main.forms import ProductForm
 from .models import Product
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseNotFound
 
@@ -21,28 +21,11 @@ from django.contrib.auth.decorators import login_required
 
 from django.views.decorators.csrf import csrf_exempt
 
-name = "a"
-def tes(request):
-    if request.method=="POST":
-        rangee = request.POST.get("rangeee") #id
-        radio = request.POST.get("radioname") #name
-        datetime_local = request.POST.get("datetime-local") #name
-        check = request.POST.getlist("box") #name
-        print(rangee)
-        print(radio)
-        date = datetime.datetime.strptime(datetime_local, "%Y-%m-%dT%H:%M")
-        print(date)
-        print("check",check)
-
-    response = {"name": name}
-    return render(request, 'tes.html', response)
-
 # Create your views here.
 @login_required(login_url = '/login')
 def show_main(request):
     products = Product.objects.filter(user=request.user)
-    products.delete()
-    print(products, type(products))
+
     context = {
         'name': request.user.username,
         'class': 'PBP D', # Kelas PBP kamu
@@ -56,15 +39,9 @@ def show_main(request):
 def create_product(request):
     form = ProductForm(request.POST or None)
 
-    if request.method == "POST":
-        name = request.POST.get("name")
-        price = request.POST.get("price")
-        description = request.POST.get("description")
-        product = Product.objects.create(name=name,price= price,description= description)
-        product = Product(name=name,price= price,description= description)
-        # product = form.save(commit=False)
-        # print("product = form.save(commit=False): "+str(product))
-
+    if form.is_valid() and request.method == "POST":
+        product = form.save(commit=False)
+        print("product = form.save(commit=False): "+str(product))
         product.user = request.user
         product.save()
         return HttpResponseRedirect(reverse('main:show_main'))

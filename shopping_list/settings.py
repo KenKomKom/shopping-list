@@ -49,6 +49,18 @@ CORS_ALLOWED_ORIGINS = [
 
 LOGIN_REDIRECT_URL = 'http://kenichi-komala-tutorial.pbp.cs.ui.ac.id/'  # yg lu pengen redir kalo misalny selesai loggin
 
+CORS_ALLOW_HEADERS=[
+    'accept',
+    'ccept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user_agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'acces-control-allow-origin'
+]
 
 # Application definition
 

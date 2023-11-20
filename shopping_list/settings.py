@@ -46,6 +46,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://kenichi-komala-tutorial.pbp.cs.ui.ac.id",
 ]
 
+LOGIN_REDIRECT_URL = 'http://kenichi-komala-tutorial.pbp.cs.ui.ac.id/'  # yg lu pengen redir kalo misalny selesai loggin
+
 
 # Application definition
 
